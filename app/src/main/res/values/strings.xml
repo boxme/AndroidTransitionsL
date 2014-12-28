@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TransitionsAndroidL</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="bye_world">Bye world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_calling">CallingActivity</string>
+    <string name="title_activity_called">CalledActivity</string>
+
+</resources>
