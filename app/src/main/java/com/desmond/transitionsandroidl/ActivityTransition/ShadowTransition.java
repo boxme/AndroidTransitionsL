@@ -6,6 +6,7 @@ import android.content.Context;
 import android.transition.Transition;
 import android.transition.TransitionValues;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
  */
 public class ShadowTransition extends Transition {
 
+    public static final String TAG = ShadowTransition.class.getSimpleName();
     private static final String PROPERTY_TRANSLATION_Z = "shadow:translationZ";
     private static final String[] PROPERTIES = {PROPERTY_TRANSLATION_Z};
 
@@ -32,6 +34,7 @@ public class ShadowTransition extends Transition {
 
     @Override
     public void captureStartValues(TransitionValues transitionValues) {
+        Log.d(TAG, "captureStartValues");
         captureValues(transitionValues);
     }
 

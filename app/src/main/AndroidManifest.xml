@@ -14,15 +14,19 @@
         <activity
             android:name=".ActivityTransition.CallingActivity"
             android:label="@string/title_activity_calling" >
+        </activity>
+        <activity
+            android:name=".ActivityTransition.CalledActivity"
+            android:label="@string/title_activity_called" >
+        </activity>
+        <activity
+            android:name=".FragmentTransition.ControlActivity"
+            android:label="@string/title_activity_control" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ActivityTransition.CalledActivity"
-            android:label="@string/title_activity_called" >
         </activity>
     </application>
 

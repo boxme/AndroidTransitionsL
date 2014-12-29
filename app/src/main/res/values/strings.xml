@@ -7,5 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_calling">CallingActivity</string>
     <string name="title_activity_called">CalledActivity</string>
+    <string name="title_activity_control">ControlActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
