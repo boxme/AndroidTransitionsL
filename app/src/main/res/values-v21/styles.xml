@@ -7,5 +7,9 @@
         <item name="android:windowSharedElementReenterTransition">@transition/shared_element_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/shared_element_exit</item>
         <item name="android:windowReenterTransition">@android:transition/slide_bottom</item>
+
+        <!-- 2 other transitions that we can set -->
+        <!--<item name="android:windowEnterTransition"></item>-->
+        <!--<item name="android:windowReturnTransition"></item>-->
     </style>
 </resources>

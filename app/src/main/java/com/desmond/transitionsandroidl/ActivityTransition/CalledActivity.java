@@ -30,6 +30,15 @@ public class CalledActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_called);
+
+        /*
+        material-themed applications have their enter/return content transitions started a tiny bit
+        before their exit/reenter content transitions complete, creating a small overlap that makes
+        the overall effect more seamless and dramatic. If you wish to explicitly disable
+        this behavior, you can do so by calling the
+         */
+//        getWindow().setAllowEnterTransitionOverlap(boolean);
+//        getWindow().setAllowReturnTransitionOverlap(boolean);
     }
 
 
@@ -53,5 +62,13 @@ public class CalledActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        // To programatically trigger a return transition,
+        // call finishAfterTransition() instead of finish().
+        finishAfterTransition();
     }
 }
