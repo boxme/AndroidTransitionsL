@@ -1,15 +1,19 @@
 package com.desmond.transitionsandroidl.ActivityTransition.gridview;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.desmond.transitionsandroidl.ActivityTransition.BaseActivity;
 import com.desmond.transitionsandroidl.R;
 import com.desmond.transitionsandroidl.adapter.RadioHeadAdapter;
 
-public class CallingGridViewActivity extends BaseActivity {
+public class CallingGridViewActivity extends BaseActivity implements RadioHeadAdapter.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,23 @@ public class CallingGridViewActivity extends BaseActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         RadioHeadAdapter adapter = new RadioHeadAdapter();
+        adapter.setOnClickListener(this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        startActivityWithTransitions(view, position);
+    }
+
+    private void startActivityWithTransitions(View view, int position) {
+        Pair<View, String> pair = new Pair<>(view, getString(R.string.hero_image));
+
+        ActivityOptionsCompat activityOptionsCompat
+                = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair);
+
+        Intent intent = new Intent(this, CalledGridViewActivity.class);
+        intent.putExtra(CalledGridViewActivity.POSITION, position);
+        startActivity(intent, activityOptionsCompat.toBundle());
     }
 }

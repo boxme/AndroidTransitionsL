@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.desmond.transitionsandroidl.ActivityTransition.gridview.CalledGridViewActivity">
+
+    <include
+        layout="@layout/toolbar_layout"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivCoverPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cover_photo_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/radiohead_cover"/>
+
+        <com.desmond.transitionsandroidl.view.SquareImageView
+            android:id="@+id/ivThumbnail"
+            android:layout_width="@dimen/thumbnail_size"
+            android:layout_height="@dimen/thumbnail_size"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:src="@drawable/radiohead_art_1"
+            android:transitionName="@string/hero_image"/>
+
+    </FrameLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        app:contentPaddingTop="10dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        app:contentPaddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/short_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/mid_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/mid_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/mid_text"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

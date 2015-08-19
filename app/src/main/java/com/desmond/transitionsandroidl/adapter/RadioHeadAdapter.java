@@ -13,18 +13,33 @@ import com.desmond.transitionsandroidl.R;
  */
 public class RadioHeadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private OnClickListener mListener;
+
+    public interface OnClickListener {
+        void onClick(View view, int position);
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gridview_item, parent, false);
-
-        return new PhotoViewHolder(view);
+        RecyclerView.ViewHolder holder = new PhotoViewHolder(view);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onClick(v, (int) v.getTag());
+                }
+            }
+        });
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final PhotoViewHolder viewHolder = (PhotoViewHolder) holder;
-
-        switch (position % 4) {
+        final int pos = position % 4;
+        viewHolder.ivPhoto.setTag(pos);
+        switch (pos) {
             case 0: {
                 viewHolder.ivPhoto.setImageResource(R.drawable.radiohead_art_1);
                 break;
@@ -47,6 +62,10 @@ public class RadioHeadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return 10;
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        mListener = listener;
     }
 
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
