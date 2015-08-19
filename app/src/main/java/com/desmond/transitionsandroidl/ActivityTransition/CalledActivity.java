@@ -2,6 +2,7 @@ package com.desmond.transitionsandroidl.ActivityTransition;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,7 +25,7 @@ import com.desmond.transitionsandroidl.R;
  * location/size in the called Activity to the location/size in the calling Activity.
  * Defaults to shared element enter transition.
  */
-public class CalledActivity extends ActionBarActivity {
+public class CalledActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

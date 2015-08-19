@@ -9,5 +9,7 @@
     <string name="title_activity_called">CalledActivity</string>
     <string name="title_activity_control">ControlActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_calling_grid_view">CallingGridViewActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
 
 </resources>

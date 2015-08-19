@@ -22,11 +22,21 @@
         <activity
             android:name=".FragmentTransition.ControlActivity"
             android:label="@string/title_activity_control" >
+        </activity>
+        <activity
+            android:name=".ActivityTransition.gridview.CallingGridViewActivity"
+            android:label="@string/title_activity_calling_grid_view" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ActivityTransition.BaseActivity"
+            android:label="@string/title_activity_base" >
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +33,7 @@ import java.util.List;
  * In this example, this drops the shared element back into the CallingActivity.
  * Defaults to shared element exit transition.
  */
-public class CallingActivity extends ActionBarActivity {
+public class CallingActivity extends AppCompatActivity {
 
     public static final String TAG = CallingActivity.class.getSimpleName();
 
