@@ -1,5 +1,6 @@
 package com.desmond.transitionsandroidl.ActivityTransition;
 
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -38,5 +39,15 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         setSupportActionBar(mToolBar);
+    }
+
+    public View getToolbar() {
+        return mToolBar;
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAfterTransition(this);
+        super.onBackPressed();
     }
 }

@@ -2,6 +2,7 @@ package com.desmond.transitionsandroidl.ActivityTransition;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.transition.Transition;
 import android.transition.TransitionValues;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 /**
  * Created by desmond on 28/12/14.
  */
+@TargetApi(21)
 public class ShadowTransition extends Transition {
 
     public static final String TAG = ShadowTransition.class.getSimpleName();
@@ -34,7 +36,6 @@ public class ShadowTransition extends Transition {
 
     @Override
     public void captureStartValues(TransitionValues transitionValues) {
-        Log.d(TAG, "captureStartValues");
         captureValues(transitionValues);
     }
 

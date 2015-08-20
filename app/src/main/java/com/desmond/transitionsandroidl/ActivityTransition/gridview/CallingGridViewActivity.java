@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.desmond.transitionsandroidl.ActivityTransition.BaseActivity;
 import com.desmond.transitionsandroidl.R;
+import com.desmond.transitionsandroidl.TransitionHelper;
 import com.desmond.transitionsandroidl.adapter.RadioHeadAdapter;
 
 public class CallingGridViewActivity extends BaseActivity implements RadioHeadAdapter.OnClickListener {
@@ -42,10 +43,8 @@ public class CallingGridViewActivity extends BaseActivity implements RadioHeadAd
     }
 
     private void startActivityWithTransitions(View view, int position) {
-        Pair<View, String> pair = new Pair<>(view, getString(R.string.hero_image));
-
         ActivityOptionsCompat activityOptionsCompat
-                = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair);
+                = TransitionHelper.makeOptionsCompat(this, Pair.create(view, getString(R.string.hero_image)));
 
         Intent intent = new Intent(this, CalledGridViewActivity.class);
         intent.putExtra(CalledGridViewActivity.POSITION, position);

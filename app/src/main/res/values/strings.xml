@@ -12,4 +12,5 @@
 
     <!-- Transition Name -->
     <string name="hero_image">hero_image</string>
+    <string name="tool_bar">tool_bar</string>
 </resources>
