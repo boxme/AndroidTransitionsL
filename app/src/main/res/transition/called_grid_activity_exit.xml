@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="together">
+
+    <slide
+        android:interpolator="@android:interpolator/accelerate_cubic"
+        android:slideEdge="top">
+        <targets>
+            <target android:targetId="@id/top_panel" android:targetName="@string/slide_up_panel"/>
+        </targets>
+    </slide>
+
+    <slide
+        android:interpolator="@android:interpolator/accelerate_cubic"
+        android:slideEdge="bottom">
+        <targets>
+            <target android:targetId="@id/cvContent" android:targetName="@string/slide_down_panel"/>
+        </targets>
+    </slide>
+</transitionSet>

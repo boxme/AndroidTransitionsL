@@ -1,11 +1,14 @@
 package com.desmond.transitionsandroidl.ActivityTransition.gridview;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.transition.Scene;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
+import android.view.Window;
 import android.widget.ImageView;
 
-import com.desmond.transitionsandroidl.ActivityTransition.BaseActivity;
+import com.desmond.transitionsandroidl.BaseActivity;
 import com.desmond.transitionsandroidl.R;
 import com.desmond.transitionsandroidl.view.SquareImageView;
 
@@ -38,5 +41,18 @@ public class CalledGridViewActivity extends BaseActivity {
                 break;
             }
         }
+
+        initTransition();
+    }
+
+    private void initTransition() {
+        Window window = getWindow();
+        TransitionInflater inflater = TransitionInflater.from(this);
+        Transition returnTransition = inflater.inflateTransition(R.transition.called_grid_activity_exit);
+        window.setReturnTransition(returnTransition);
+
+//        window.setExitTransition();
+//        window.setReenterTransition();
+//        window.setEnterTransition();
     }
 }

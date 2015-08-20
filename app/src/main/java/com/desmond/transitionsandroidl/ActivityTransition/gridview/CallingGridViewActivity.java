@@ -9,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.desmond.transitionsandroidl.ActivityTransition.BaseActivity;
+import com.desmond.transitionsandroidl.BaseActivity;
 import com.desmond.transitionsandroidl.R;
 import com.desmond.transitionsandroidl.TransitionHelper;
 import com.desmond.transitionsandroidl.adapter.RadioHeadAdapter;

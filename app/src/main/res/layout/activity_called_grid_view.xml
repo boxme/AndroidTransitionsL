@@ -10,8 +10,11 @@
         layout="@layout/toolbar_layout"/>
 
     <FrameLayout
+        android:id="@+id/top_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:transitionName="@string/slide_up_panel"
+        android:transitionGroup="true">
 
         <ImageView
             android:id="@+id/ivCoverPhoto"
@@ -36,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:transitionName="@string/slide_down_panel"
         app:cardCornerRadius="5dp"
         app:contentPaddingTop="10dp"
         app:contentPaddingLeft="10dp"

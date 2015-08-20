@@ -13,4 +13,7 @@
     <!-- Transition Name -->
     <string name="hero_image">hero_image</string>
     <string name="tool_bar">tool_bar</string>
+    <string name="slide_up_panel">slide_up_panel</string>
+    <string name="slide_down_panel">slide_down_panel</string>
+
 </resources>

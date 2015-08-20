@@ -1,7 +1,7 @@
-package com.desmond.transitionsandroidl.ActivityTransition;
+package com.desmond.transitionsandroidl;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,7 +11,8 @@ import android.view.View;
 import com.desmond.transitionsandroidl.R;
 import com.desmond.transitionsandroidl.TransitionHelper;
 
-public class BaseActivity extends AppCompatActivity implements TransitionHelper.Source {
+public class BaseActivity extends AppCompatActivity
+        implements TransitionHelper.Source, TransitionHelper.TransitionListener {
 
     Toolbar mToolBar;
     TransitionHelper mTransitionHelper;
@@ -54,6 +55,7 @@ public class BaseActivity extends AppCompatActivity implements TransitionHelper.
         }
 
         setSupportActionBar(mToolBar);
+        getSupportActionBar().setTitle("");
     }
 
     public View getToolbar() {
@@ -74,5 +76,30 @@ public class BaseActivity extends AppCompatActivity implements TransitionHelper.
     @Override
     public void setTransitionHelper(TransitionHelper transitionHelper) {
         mTransitionHelper = transitionHelper;
+    }
+
+    @Override
+    public void onBeforeViewShows(View contentView) {
+
+    }
+
+    @Override
+    public void onBeforeEnter(View contentView) {
+
+    }
+
+    @Override
+    public void onAfterEnter() {
+
+    }
+
+    @Override
+    public boolean onBeforeBack() {
+        return false;
+    }
+
+    @Override
+    public void onBeforeReturn() {
+
     }
 }
