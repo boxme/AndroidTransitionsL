@@ -3,7 +3,7 @@
     android:transitionOrdering="sequential">
 
     <!-- Move then drop -->
-    <transition class="com.desmond.transitionsandroidl.ActivityTransition.ShadowTransition"
+    <transition class="com.desmond.transitionsandroidl.customTransition.ShadowTransition"
         android:duration="150"/>
     <changeBounds/>
 

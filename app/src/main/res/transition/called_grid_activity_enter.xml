@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <transition class="com.desmond.transitionsandroidl.customTransition.RevealTransition"
+        android:duration="500"
+        android:transitionVisibilityMode="mode_in|mode_out">
+        <targets>
+            <target android:targetId="@id/top_panel"/>
+        </targets>
+    </transition>
+</transitionSet>

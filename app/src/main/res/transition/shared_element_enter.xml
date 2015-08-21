@@ -4,6 +4,6 @@
 
     <!-- lift to happen first, then move. Compare with shared_element_exit -->
     <changeBounds/>
-    <transition class="com.desmond.transitionsandroidl.ActivityTransition.ShadowTransition"
+    <transition class="com.desmond.transitionsandroidl.customTransition.ShadowTransition"
         android:duration="150"/>
 </transitionSet>
