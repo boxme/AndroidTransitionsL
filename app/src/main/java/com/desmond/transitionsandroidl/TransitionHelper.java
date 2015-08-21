@@ -15,6 +15,7 @@ import android.view.Window;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by desmond on 20/8/15.
@@ -27,6 +28,8 @@ public class TransitionHelper {
 
     boolean mIsAfterEnter;
     boolean mIsPostponeEnterTransition;
+
+    private List<TransitionListener> mListeners;
 
     public interface Source {
         TransitionHelper getTransitionHelper();
@@ -55,7 +58,6 @@ public class TransitionHelper {
          */
         void onAfterEnter();
 
-
         /**
          * Called during Activity.onBackPressed()
          * @return true if the listener has consumed the event, false otherwise
@@ -67,6 +69,7 @@ public class TransitionHelper {
 
     private TransitionHelper(AppCompatActivity activity, Bundle savedInstanceState) {
         mActivityRef = new WeakReference<>(activity);
+        mListeners = new ArrayList<>();
         mIsAfterEnter = savedInstanceState != null;
         postponeEnterTransition();
     }
@@ -95,6 +98,24 @@ public class TransitionHelper {
         shareElements = list.toArray(new Pair[list.size()]);
 
         return ActivityOptionsCompat.makeSceneTransitionAnimation(activity, shareElements);
+    }
+
+    public static void excludeEnterTarget(AppCompatActivity activity, int targetId, boolean toExclude) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().getEnterTransition().excludeTarget(targetId, toExclude);
+        }
+    }
+
+    public void addListener(TransitionListener listener) {
+        mListeners.add(listener);
+    }
+
+    private void onAfterEnter() {
+        int size = mListeners.size();
+        for (int i = 0; i < size; i++) {
+            mListeners.get(i).onAfterEnter();
+        }
+        mIsAfterEnter = true;
     }
 
     private void postponeEnterTransition() {
@@ -132,7 +153,7 @@ public class TransitionHelper {
         onViewCreated();
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-
+            onAfterEnter();
         } else {
             activity.getWindow().getSharedElementEnterTransition().addListener(new Transition.TransitionListener() {
                 @Override
@@ -143,11 +164,17 @@ public class TransitionHelper {
                 @Override
                 public void onTransitionEnd(Transition transition) {
                     Log.d(TAG, "onTransitionEnd");
+                    if (!mIsAfterEnter) {
+                        onAfterEnter();
+                    }
                 }
 
                 @Override
                 public void onTransitionCancel(Transition transition) {
                     Log.d(TAG, "onTransitionCancel");
+                    if (!mIsAfterEnter) {
+                        onAfterEnter();
+                    }
                 }
 
                 @Override
@@ -168,6 +195,15 @@ public class TransitionHelper {
      * If using fragments, call at beginning of Fragment.onViewCreated
      */
     public void onViewCreated() {
+        AppCompatActivity activity = mActivityRef.get();
+        if (activity == null) return;
+
+        View contentView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+
+        if (!mIsAfterEnter) {
+            for (TransitionListener listener : mListeners) listener.onBeforeEnter(contentView);
+        }
+
         if (mIsPostponeEnterTransition) {
             mIsPostponeEnterTransition = false;
             startPostponedEnterTransition();

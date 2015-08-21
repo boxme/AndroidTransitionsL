@@ -3,6 +3,7 @@
 
     <transition class="com.desmond.transitionsandroidl.customTransition.RevealTransition"
         android:duration="500"
+        android:startDelay="500"
         android:transitionVisibilityMode="mode_in|mode_out">
         <targets>
             <target android:targetId="@id/top_panel"/>

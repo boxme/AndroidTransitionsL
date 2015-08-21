@@ -34,7 +34,6 @@ public class RevealTransition extends Visibility {
     public Animator onAppear(ViewGroup sceneRoot, final View view,
                              TransitionValues startValues, TransitionValues endValues) {
         final float radius = calculateMaxRadius(view);
-        final float originalAlpha = view.getAlpha();
 
         // Initial state should be invisible. Use alpha for less side effects
 //        view.setAlpha(0f);
@@ -43,7 +42,7 @@ public class RevealTransition extends Visibility {
         reveal.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-//                view.setAlpha(originalAlpha);
+                view.setAlpha(1f);
             }
         });
 
