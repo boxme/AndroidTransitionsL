@@ -28,6 +28,7 @@ public class TransitionHelper {
 
     boolean mIsAfterEnter;
     boolean mIsPostponeEnterTransition;
+    boolean mIsViewCreatedAlreadyCalled;
 
     private List<TransitionListener> mListeners;
 
@@ -43,15 +44,13 @@ public class TransitionHelper {
     public interface TransitionListener {
         /**
          * Called during every onViewCreated
-         * @param contentView
          */
-        void onBeforeViewShows(View contentView);
+        void onBeforeViewsShow();
 
         /**
          * Called during onViewCreated only on an enter transition
-         * @param contentView
          */
-        void onBeforeEnter(View contentView);
+        void onBeforeEnter();
 
         /**
          * Called after enter transition is finished for L+, otherwise called immediately during first onResume
@@ -64,22 +63,29 @@ public class TransitionHelper {
          */
         boolean onBeforeBack();
 
+        /**
+         * Called before the run of a Return transition
+         */
         void onBeforeReturn();
-    }
-
-    private TransitionHelper(AppCompatActivity activity, Bundle savedInstanceState) {
-        mActivityRef = new WeakReference<>(activity);
-        mListeners = new ArrayList<>();
-        mIsAfterEnter = savedInstanceState != null;
-        postponeEnterTransition();
     }
 
     public static TransitionHelper of(AppCompatActivity activity) {
         return ((Source) activity).getTransitionHelper();
     }
 
+    /**
+     * Called in Activity.onCreate
+     */
     public static void init(Source source, Bundle savedInstanceState) {
         source.setTransitionHelper(new TransitionHelper((BaseActivity) source, savedInstanceState));
+    }
+
+    private TransitionHelper(AppCompatActivity activity, Bundle savedInstanceState) {
+        mActivityRef = new WeakReference<>(activity);
+        mListeners = new ArrayList<>();
+        mIsAfterEnter = savedInstanceState != null;
+        mIsViewCreatedAlreadyCalled = false;
+        postponeEnterTransition();
     }
 
     public static ActivityOptionsCompat makeOptionsCompat(
@@ -118,6 +124,33 @@ public class TransitionHelper {
         mIsAfterEnter = true;
     }
 
+    /**
+     * Should be called immediately after all shared elements transition views are inflated
+     * If using fragments, call at beginning of Fragment.onViewCreated
+     */
+    public void onViewCreated() {
+        AppCompatActivity activity = mActivityRef.get();
+        if (activity == null || mIsViewCreatedAlreadyCalled) return;
+        mIsViewCreatedAlreadyCalled = true;
+
+        final int numOfListeners = mListeners.size();
+        for (int i = 0; i < numOfListeners; i++) {
+            mListeners.get(i).onBeforeViewsShow();
+        }
+
+        if (!mIsAfterEnter) {
+            for (int i = 0; i < numOfListeners; i++) {
+                mListeners.get(i).onBeforeEnter();
+            }
+        }
+
+        if (mIsPostponeEnterTransition) {
+            mIsPostponeEnterTransition = false;
+            startPostponedEnterTransition();
+        }
+    }
+
+
     private void postponeEnterTransition() {
         final AppCompatActivity activity = mActivityRef.get();
         if (mIsAfterEnter || activity == null) return;
@@ -145,20 +178,33 @@ public class TransitionHelper {
      * Should be called from Activity.onResume
      */
     public void onResume() {
-        if (mIsAfterEnter) return;
-
         AppCompatActivity activity = mActivityRef.get();
-        if (activity == null) return;
+        if (activity == null || mIsAfterEnter) return;
 
-        onViewCreated();
+        if (!mIsViewCreatedAlreadyCalled) onViewCreated();
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             onAfterEnter();
         } else {
+//            activity.getWindow().getEnterTransition().addListener();
+//            activity.getWindow().getExitTransition().addListener();
+//            activity.getWindow().getReenterTransition().addListener();
+//            activity.getWindow().getReturnTransition().addListener();
+
+//            activity.getWindow().getSharedElementExitTransition().addListener();
+//            activity.getWindow().getSharedElementReenterTransition().addListener();
+//            activity.getWindow().getSharedElementReturnTransition().addListener();
+
             activity.getWindow().getSharedElementEnterTransition().addListener(new Transition.TransitionListener() {
                 @Override
                 public void onTransitionStart(Transition transition) {
                     Log.d(TAG, "onTransitionStart");
+                    if (mIsAfterEnter) {
+                        final int numOfListeners = mListeners.size();
+                        for (int i = 0; i < numOfListeners; i++) {
+                            mListeners.get(i).onBeforeReturn();
+                        }
+                    }
                 }
 
                 @Override
@@ -191,32 +237,18 @@ public class TransitionHelper {
     }
 
     /**
-     * Should be called immediately after all shared elements transition views are inflated
-     * If using fragments, call at beginning of Fragment.onViewCreated
-     */
-    public void onViewCreated() {
-        AppCompatActivity activity = mActivityRef.get();
-        if (activity == null) return;
-
-        View contentView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-
-        if (!mIsAfterEnter) {
-            for (TransitionListener listener : mListeners) listener.onBeforeEnter(contentView);
-        }
-
-        if (mIsPostponeEnterTransition) {
-            mIsPostponeEnterTransition = false;
-            startPostponedEnterTransition();
-        }
-    }
-
-    /**
      * Should be called from Activity.onBackPressed
      */
     public void onBackPressed() {
         final AppCompatActivity activity = mActivityRef.get();
         if (activity == null) return;
 
-        ActivityCompat.finishAfterTransition(activity);
+        boolean isConsumed = false;
+        final int numOfListeners = mListeners.size();
+        for (int i = 0; i < numOfListeners; i++) {
+            isConsumed = mListeners.get(i).onBeforeBack() || isConsumed;
+        }
+
+        if (!isConsumed) ActivityCompat.finishAfterTransition(activity);
     }
 }

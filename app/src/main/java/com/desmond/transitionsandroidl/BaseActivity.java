@@ -1,15 +1,11 @@
 package com.desmond.transitionsandroidl;
 
 import android.os.Bundle;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.desmond.transitionsandroidl.R;
-import com.desmond.transitionsandroidl.TransitionHelper;
 
 public class BaseActivity extends AppCompatActivity
         implements TransitionHelper.Source, TransitionHelper.TransitionListener {
@@ -25,13 +21,14 @@ public class BaseActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        mTransitionHelper.onResume();
+        TransitionHelper.of(this).onResume();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TransitionHelper.init(this, savedInstanceState);
+        TransitionHelper.of(this).addListener(this);
     }
 
     @Override
@@ -64,7 +61,7 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        mTransitionHelper.onBackPressed();
+        TransitionHelper.of(this).onBackPressed();
         super.onBackPressed();
     }
 
@@ -79,19 +76,13 @@ public class BaseActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBeforeViewShows(View contentView) {
-
-    }
+    public void onBeforeViewsShow() {}
 
     @Override
-    public void onBeforeEnter(View contentView) {
-
-    }
+    public void onBeforeEnter() {}
 
     @Override
-    public void onAfterEnter() {
-
-    }
+    public void onAfterEnter() {}
 
     @Override
     public boolean onBeforeBack() {
@@ -99,7 +90,5 @@ public class BaseActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBeforeReturn() {
-
-    }
+    public void onBeforeReturn() {}
 }

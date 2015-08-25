@@ -2,7 +2,6 @@ package com.desmond.transitionsandroidl;
 
 
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -12,19 +11,13 @@ public class BaseFragment extends Fragment implements TransitionHelper.Transitio
     public BaseFragment() {}
 
     @Override
-    public void onBeforeViewShows(View contentView) {
-
-    }
+    public void onBeforeViewsShow() {}
 
     @Override
-    public void onBeforeEnter(View contentView) {
-
-    }
+    public void onBeforeEnter() {}
 
     @Override
-    public void onAfterEnter() {
-
-    }
+    public void onAfterEnter() {}
 
     @Override
     public boolean onBeforeBack() {
@@ -32,7 +25,5 @@ public class BaseFragment extends Fragment implements TransitionHelper.Transitio
     }
 
     @Override
-    public void onBeforeReturn() {
-
-    }
+    public void onBeforeReturn() {}
 }

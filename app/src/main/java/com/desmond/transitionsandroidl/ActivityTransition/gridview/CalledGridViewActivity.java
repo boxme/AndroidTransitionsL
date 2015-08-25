@@ -4,20 +4,16 @@ import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.desmond.transitionsandroidl.BaseActivity;
 import com.desmond.transitionsandroidl.R;
-import com.desmond.transitionsandroidl.TransitionHelper;
 import com.desmond.transitionsandroidl.view.SquareImageView;
 
 public class CalledGridViewActivity extends BaseActivity {
-
+    public static final String TAG = CalledGridViewActivity.class.getSimpleName();
     public static final String POSITION = "position";
 
     LinearLayout mRootView;
@@ -26,7 +22,6 @@ public class CalledGridViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_called_grid_view);
-        TransitionHelper.of(this).addListener(this);
 
         final int position = getIntent().getIntExtra(POSITION, 0);
         final ImageView ivThumbnail = (SquareImageView) findViewById(R.id.ivThumbnail);
@@ -69,16 +64,18 @@ public class CalledGridViewActivity extends BaseActivity {
     }
 
     @Override
-    public void onBeforeEnter(View contentView) {
+    public void onBeforeViewsShow() {
         findViewById(R.id.top_panel).setAlpha(0f);
     }
 
     @Override
-    public void onBeforeReturn() {
+    public void onBeforeEnter() {
 
     }
 
     @Override
-    public void onAfterEnter() {
-    }
+    public void onBeforeReturn() {}
+
+    @Override
+    public void onAfterEnter() {}
 }
