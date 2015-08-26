@@ -16,5 +16,7 @@
     <string name="reveal_cover">reveal_cover</string>
     <string name="slide_up_panel">slide_up_panel</string>
     <string name="slide_down_panel">slide_down_panel</string>
+    <string name="band_name_panel">band_name_panel</string>
+    <string name="band_album_panel">band_album_panel</string>
 
 </resources>

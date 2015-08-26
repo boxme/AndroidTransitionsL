@@ -3,8 +3,6 @@ package com.desmond.transitionsandroidl;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 public class BaseActivity extends AppCompatActivity
@@ -31,20 +29,7 @@ public class BaseActivity extends AppCompatActivity
         TransitionHelper.of(this).addListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_empty, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    protected void initTransition() {}
 
     protected void setupToolbar() {
         if (mToolBar == null) {
@@ -63,6 +48,12 @@ public class BaseActivity extends AppCompatActivity
     public void onBackPressed() {
         TransitionHelper.of(this).onBackPressed();
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        TransitionHelper.of(this).removeListener(this);
+        super.onDestroy();
     }
 
     @Override

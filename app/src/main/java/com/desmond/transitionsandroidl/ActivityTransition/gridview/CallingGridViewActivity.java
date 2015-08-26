@@ -46,7 +46,9 @@ public class CallingGridViewActivity extends BaseActivity implements RadioHeadAd
         ActivityOptionsCompat activityOptionsCompat
                 = TransitionHelper.makeOptionsCompat(this, Pair.create(view, getString(R.string.hero_image)));
 
-        Intent intent = new Intent(this, CalledGridViewActivity.class);
+//        Intent intent = new Intent(this, CalledGridViewActivity.class);
+        Intent intent = new Intent(this, CalledDetailsViewActivity.class);
+
         intent.putExtra(CalledGridViewActivity.POSITION, position);
         startActivity(intent, activityOptionsCompat.toBundle());
     }

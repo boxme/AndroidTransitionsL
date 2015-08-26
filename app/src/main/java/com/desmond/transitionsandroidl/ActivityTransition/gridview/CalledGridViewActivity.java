@@ -2,8 +2,11 @@ package com.desmond.transitionsandroidl.ActivityTransition.gridview;
 
 import android.annotation.TargetApi;
 import android.os.Bundle;
+import android.support.v4.app.SharedElementCallback;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,6 +14,8 @@ import android.widget.LinearLayout;
 import com.desmond.transitionsandroidl.BaseActivity;
 import com.desmond.transitionsandroidl.R;
 import com.desmond.transitionsandroidl.view.SquareImageView;
+
+import java.util.List;
 
 public class CalledGridViewActivity extends BaseActivity {
     public static final String TAG = CalledGridViewActivity.class.getSimpleName();
@@ -46,10 +51,39 @@ public class CalledGridViewActivity extends BaseActivity {
 
         mRootView = (LinearLayout) findViewById(R.id.rootView);
         initTransition();
+
+        // Sequence of onSharedElementStart & onSharedElementEnd calls will be reversed in exit transition
+        setEnterSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onSharedElementStart(List<String> sharedElementNames, List<View> sharedElements,
+                                             List<View> sharedElementSnapshots) {
+                Log.d(TAG, "======> onShareElementStart");
+                final int size = sharedElementNames.size();
+                for (int i = 0; i < size; i++) {
+                    Log.d(TAG, sharedElementNames.get(i));
+                }
+
+                Log.d(TAG, "SnapShots");
+                for (int i = 0; i < sharedElementSnapshots.size(); i++) {
+                    Log.d(TAG, sharedElementSnapshots.get(i).getClass().getSimpleName());
+                }
+            }
+
+            @Override
+            public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements,
+                                           List<View> sharedElementSnapshots) {
+                Log.d(TAG, "======> onShareElementEnd");
+                final int size = sharedElementNames.size();
+                for (int i = 0; i < size; i++) {
+                    Log.d(TAG, sharedElementNames.get(i));
+                }
+            }
+        });
     }
 
     @TargetApi(21)
-    private void initTransition() {
+    @Override
+    protected void initTransition() {
         Window window = getWindow();
         TransitionInflater inflater = TransitionInflater.from(this);
 
@@ -69,9 +103,7 @@ public class CalledGridViewActivity extends BaseActivity {
     }
 
     @Override
-    public void onBeforeEnter() {
-
-    }
+    public void onBeforeEnter() {}
 
     @Override
     public void onBeforeReturn() {}

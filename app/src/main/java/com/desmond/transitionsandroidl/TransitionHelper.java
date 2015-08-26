@@ -2,6 +2,7 @@ package com.desmond.transitionsandroidl;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -112,8 +113,12 @@ public class TransitionHelper {
         }
     }
 
-    public void addListener(TransitionListener listener) {
+    public void addListener(@NonNull TransitionListener listener) {
         mListeners.add(listener);
+    }
+
+    public void removeListener(@NonNull TransitionListener listener) {
+        mListeners.remove(listener);
     }
 
     private void onAfterEnter() {
@@ -198,7 +203,7 @@ public class TransitionHelper {
             activity.getWindow().getSharedElementEnterTransition().addListener(new Transition.TransitionListener() {
                 @Override
                 public void onTransitionStart(Transition transition) {
-                    Log.d(TAG, "onTransitionStart");
+                    Log.d(TAG, "======> onTransitionStart");
                     if (mIsAfterEnter) {
                         final int numOfListeners = mListeners.size();
                         for (int i = 0; i < numOfListeners; i++) {
@@ -209,7 +214,7 @@ public class TransitionHelper {
 
                 @Override
                 public void onTransitionEnd(Transition transition) {
-                    Log.d(TAG, "onTransitionEnd");
+                    Log.d(TAG, "======> onTransitionEnd");
                     if (!mIsAfterEnter) {
                         onAfterEnter();
                     }
@@ -217,7 +222,7 @@ public class TransitionHelper {
 
                 @Override
                 public void onTransitionCancel(Transition transition) {
-                    Log.d(TAG, "onTransitionCancel");
+                    Log.d(TAG, "======> onTransitionCancel");
                     if (!mIsAfterEnter) {
                         onAfterEnter();
                     }
@@ -225,12 +230,12 @@ public class TransitionHelper {
 
                 @Override
                 public void onTransitionPause(Transition transition) {
-                    Log.d(TAG, "onTransitionPause");
+                    Log.d(TAG, "======> onTransitionPause");
                 }
 
                 @Override
                 public void onTransitionResume(Transition transition) {
-                    Log.d(TAG, "onTransitionResume");
+                    Log.d(TAG, "======> onTransitionResume");
                 }
             });
         }

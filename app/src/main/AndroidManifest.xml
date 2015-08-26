@@ -35,6 +35,9 @@
         <activity
             android:name=".ActivityTransition.gridview.CalledGridViewActivity" >
         </activity>
+        <activity
+            android:name=".ActivityTransition.gridview.CalledDetailsViewActivity" >
+        </activity>
     </application>
 
 </manifest>
