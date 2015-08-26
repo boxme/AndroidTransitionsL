@@ -77,18 +77,12 @@ public class CalledDetailsViewActivity extends BaseActivity {
 
     @Override
     public void onBeforeViewsShow() {
-//        mDescView.setVisibility(View.INVISIBLE);
-//        mTitleTv.setVisibility(View.INVISIBLE);
-//        mSubTitleTv.setVisibility(View.INVISIBLE);
-//        mBottomView.setVisibility(View.INVISIBLE);
+        mDescView.setAlpha(0f);
+        mBottomView.setAlpha(0f);
     }
 
     @Override
     public void onBeforeEnter() {
-//        mDescView.setVisibility(View.VISIBLE);
-//        mTitleTv.setVisibility(View.VISIBLE);
-//        mSubTitleTv.setVisibility(View.VISIBLE);
-//        mBottomView.setVisibility(View.VISIBLE);
     }
 
     @Override

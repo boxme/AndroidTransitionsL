@@ -1,6 +1,7 @@
 package com.desmond.transitionsandroidl.customTransition;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -26,8 +27,16 @@ public class FoldTransition extends Visibility {
     }
 
     @Override
-    public Animator onAppear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
-        return createFoldAnimator(view, false);
+    public Animator onAppear(ViewGroup sceneRoot, final View view, TransitionValues startValues, TransitionValues endValues) {
+        Animator fold =  createFoldAnimator(view, false);
+
+        fold.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                view.setAlpha(1f);
+            }
+        });
+        return fold;
     }
 
     @Override
