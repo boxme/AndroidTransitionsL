@@ -49,7 +49,8 @@ public class FoldTransition extends Visibility {
         int end = view.getTop() + view.getMeasuredHeight() - 1;
         if (folding) {
             int temp = start;
-            start = end; end = temp;
+            start = end;
+            end = temp;
         }
         return ObjectAnimator.ofInt(view, "bottom", start, end);
     }

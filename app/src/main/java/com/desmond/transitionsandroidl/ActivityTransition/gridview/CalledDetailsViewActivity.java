@@ -22,6 +22,7 @@ public class CalledDetailsViewActivity extends BaseActivity {
     private View mTitleTv;
     private View mSubTitleTv;
     private View mBottomView;
+    private View mFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class CalledDetailsViewActivity extends BaseActivity {
         mTitleTv = findViewById(R.id.title);
         mSubTitleTv = findViewById(R.id.subtitle);
         mBottomView = findViewById(R.id.llBottom);
+        mFAB = findViewById(R.id.fab);
 
         switch (position) {
             case 0: {
@@ -63,7 +65,6 @@ public class CalledDetailsViewActivity extends BaseActivity {
     protected void initTransition() {
         Window window = getWindow();
         TransitionInflater inflater = TransitionInflater.from(this);
-
         Transition sharedElementEnterTransition
                 = inflater.inflateTransition(R.transition.shared_element_called_details_activity_enter);
         window.setSharedElementEnterTransition(sharedElementEnterTransition);
@@ -71,14 +72,24 @@ public class CalledDetailsViewActivity extends BaseActivity {
         Transition enterTransition = inflater.inflateTransition(R.transition.called_details_view_activity_enter);
         window.setEnterTransition(enterTransition);
 
-//        window.setSharedElementReturnTransition(null);
+        Transition sharedElementReturnTransition
+                = inflater.inflateTransition(R.transition.shared_element_called_details_activity_return);
+        window.setSharedElementReturnTransition(sharedElementReturnTransition);
+
+        Transition returnTransition = inflater.inflateTransition(R.transition.called_details_view_activity_return);
+        window.setReturnTransition(returnTransition);
+
 //        window.setReturnTransition(null);
+    }
+
+    private void setSharedElementsTransitionListener() {
     }
 
     @Override
     public void onBeforeViewsShow() {
         mDescView.setAlpha(0f);
         mBottomView.setAlpha(0f);
+        mFAB.setAlpha(0f);
     }
 
     @Override

@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
-    android:startDelay="300"
     android:transitionOrdering="sequential">
 
-    <transition class="com.desmond.transitionsandroidl.customTransition.FoldTransition">
+    <transition class="com.desmond.transitionsandroidl.customTransition.ScaleTransition">
         <targets>
-            <target android:targetId="@id/llDescription"/>
+            <target android:targetId="@id/fab"/>
         </targets>
     </transition>
 
     <transition class="com.desmond.transitionsandroidl.customTransition.FoldTransition">
         <targets>
-            <target android:targetId="@id/llBottom"/>
+            <target android:id="@id/llBottom" />
         </targets>
     </transition>
 
-    <!--Fade won't occur properly because the targets are within a parent grp that is also being transited -->
     <fade
-        android:fadingMode="fade_in">
+        android:fadingMode="fade_out">
         <targets>
             <target android:targetId="@id/title"/>
             <target android:targetId="@id/subtitle"/>
         </targets>
     </fade>
 
-    <transition class="com.desmond.transitionsandroidl.customTransition.ScaleTransition">
+    <transition class="com.desmond.transitionsandroidl.customTransition.FoldTransition">
         <targets>
-            <target android:targetId="@id/fab"/>
+            <target android:id="@id/llDescription" />
         </targets>
     </transition>
 

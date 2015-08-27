@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include
+        android:id="@+id/toolbar_view"
         layout="@layout/toolbar_layout"/>
 
     <ImageView
@@ -14,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/large_picture"
         android:transitionName="@string/hero_image"
+        android:layout_below="@id/toolbar_view"
         tools:src="@drawable/radiohead_art_1"
         android:scaleType="centerCrop"/>
 
@@ -21,6 +23,7 @@
         android:id="@+id/llDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ivLargePhoto"
         android:background="#31576b"
         android:padding="20dp"
         android:orientation="vertical">
@@ -41,11 +44,23 @@
 
     </LinearLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/llDescription"
+        android:layout_marginTop="-30dp"
+        android:layout_marginRight="20dp"
+        app:elevation="4dp"
+        app:fabSize="normal"/>
+
     <LinearLayout
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionName="@string/band_album_panel"
+        android:layout_below="@id/llDescription"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="20dp"
@@ -72,4 +87,4 @@
             android:text="Buy!"/>
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
