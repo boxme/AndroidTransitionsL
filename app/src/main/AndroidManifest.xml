@@ -27,14 +27,14 @@
         </activity>
         <activity android:name=".ActivityTransition.gridview.CalledDetailsViewActivity" >
         </activity>
-        <activity
-            android:name=".ActivityTransition.listview.CallingListViewActivity" >
+        <activity android:name=".ActivityTransition.listview.CallingListViewActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityTransition.listview.CalledListViewActivity"/>
     </application>
 
 </manifest>

@@ -19,5 +19,6 @@
     <string name="band_name_panel">band_name_panel</string>
     <string name="band_album_panel">band_album_panel</string>
     <string name="list_item">list_item</string>
+    <string name="list_details">list_details</string>
 
 </resources>

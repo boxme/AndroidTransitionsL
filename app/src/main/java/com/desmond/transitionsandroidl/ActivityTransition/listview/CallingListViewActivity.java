@@ -1,5 +1,6 @@
 package com.desmond.transitionsandroidl.ActivityTransition.listview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -38,6 +39,8 @@ public class CallingListViewActivity extends BaseActivity implements TextAdapter
     @Override
     public void onClick(View view, int position) {
         ActivityOptionsCompat activityOptionsCompat
-                = TransitionHelper.makeOptionsCompat(this, Pair.create(view, getString(R.string.list_item)));
+                = TransitionHelper.makeOptionsCompat(this, Pair.create(view, getString(R.string.list_details)));
+        Intent intent = new Intent(this, CalledListViewActivity.class);
+        startActivity(intent, activityOptionsCompat.toBundle());
     }
 }
