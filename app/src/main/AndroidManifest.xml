@@ -7,8 +7,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".BaseActivity">
+        <activity android:name=".BaseActivity" >
         </activity>
         <activity
             android:name=".MainActivity"
@@ -16,27 +15,25 @@
         </activity>
         <activity
             android:name=".ActivityTransition.CallingActivity"
-            android:theme="@style/AppThemeTransitionXML">
+            android:theme="@style/AppThemeTransitionXML" >
+        </activity>
+        <activity android:name=".ActivityTransition.CalledActivity" >
+        </activity>
+        <activity android:name=".FragmentTransition.ControlActivity" >
+        </activity>
+        <activity android:name=".ActivityTransition.gridview.CallingGridViewActivity" >
+        </activity>
+        <activity android:name=".ActivityTransition.gridview.CalledGridViewActivity" >
+        </activity>
+        <activity android:name=".ActivityTransition.gridview.CalledDetailsViewActivity" >
         </activity>
         <activity
-            android:name=".ActivityTransition.CalledActivity">
-        </activity>
-        <activity
-            android:name=".FragmentTransition.ControlActivity" >
-        </activity>
-        <activity
-            android:name=".ActivityTransition.gridview.CallingGridViewActivity">
+            android:name=".ActivityTransition.listview.CallingListViewActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ActivityTransition.gridview.CalledGridViewActivity" >
-        </activity>
-        <activity
-            android:name=".ActivityTransition.gridview.CalledDetailsViewActivity" >
         </activity>
     </application>
 
